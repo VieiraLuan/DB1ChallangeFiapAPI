@@ -1,11 +1,20 @@
+
+
+using DB1ChallangeFiapAPI.Dependencies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+//Add Dependence Injection
+builder.Services.AddResolveDependecies();
 
 var app = builder.Build();
 
