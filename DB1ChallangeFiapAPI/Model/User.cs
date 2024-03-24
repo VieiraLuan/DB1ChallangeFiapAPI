@@ -13,8 +13,8 @@
 
         //Business Data
         public string UserType { get; set; }
-        public string MenteeMax { get; set; }
-        public string MenteeeNumber { get; set; }
+        public int MenteeMax { get; set; }
+        public int MenteeeNumber { get; set; }
 
 
         //Fk
@@ -44,6 +44,26 @@
             State = state;
             UserType = userType;
             Password = password;
+        }
+
+        // Mentee
+        public User(int userid, int interestid)
+        {
+            Id = userid;
+            InterestId = interestid;
+
+        }
+
+        //Mentor
+        public User(int userid, int interestid, int skillid, int experienceid, int backgroundid, int menteeMaxNumber)
+        {
+            Id = userid;
+            InterestId = interestid;
+            SkillId = skillid;
+            ExperienceId = experienceid;
+            BackgroundId = backgroundid;
+            MenteeeNumber = 0;
+            MenteeMax = menteeMaxNumber;
         }
 
 

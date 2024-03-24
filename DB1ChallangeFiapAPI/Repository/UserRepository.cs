@@ -24,7 +24,23 @@ namespace DB1ChallangeFiapAPI.Repository
             return await db.ExecuteScalarAsync<int>(sql, user);
         }
 
+        public async Task<int> UpdateMenteeAsync(User user)
+        {
+            using IDbConnection db = new SqlConnection(getConnectionString());
 
+            const string sql = @"UPDATE tb_user SET interest_id = @InterestId WHERE id = @Id";
 
+            return await db.ExecuteAsync(sql, user);
+        }
+
+        public async Task<int> UpdateMentorAsync(User user)
+        {
+            using IDbConnection db = new SqlConnection(getConnectionString());
+
+            const string sql = @"UPDATE tb_user SET interest_id = @InterestId, skill_id = @SkillId,
+            experience_id = @ExperienceId, background_id = @BackgroundId, mentee_max = @MenteeMax WHERE id = @Id";
+
+            return await db.ExecuteAsync(sql, user);
+        }
     }
 }
