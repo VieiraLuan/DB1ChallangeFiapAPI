@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DB1ChallangeFiapAPI.Controllers
 {
+    [ApiController]
     public class UserController : ControllerBase
     {
 
