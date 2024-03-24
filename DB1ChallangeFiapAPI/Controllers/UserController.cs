@@ -1,10 +1,11 @@
 ﻿using DB1ChallangeFiapAPI.Model;
 using DB1ChallangeFiapAPI.Repository.Interface;
+using DB1ChallangeFiapAPI.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DB1ChallangeFiapAPI.Controllers
 {
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
 
         private readonly IUserRepository _userRepository;
@@ -17,7 +18,7 @@ namespace DB1ChallangeFiapAPI.Controllers
 
         [HttpPost]
         [Route("createAccount")]
-        public async Task<IActionResult> CreateAccount(User model)
+        public async Task<IActionResult> CreateAccount(CreateUserAccountViewModel model)
         {
             try
             {
@@ -56,7 +57,7 @@ namespace DB1ChallangeFiapAPI.Controllers
 
                     if (userId > 0)
                     {
-                        return Created("Usuário criado com sucesso.", userId);
+                        return Ok($"Usuário criado com sucesso.{userId}");
                     }
                     else
                     {
@@ -76,13 +77,13 @@ namespace DB1ChallangeFiapAPI.Controllers
 
         [HttpPut]
         [Route("updateMenteeAccount")]
-        public async Task<IActionResult> UpdateMenteeAccount(User model)
+        public async Task<IActionResult> UpdateMenteeAccount(UpdateMenteeAccountViewModel model)
         {
             try
             {
-                if (model.Id != null && model.InterestId != null)
+                if (model.UserId != null && model.InterestId != null)
                 {
-                    User user = new User(model.Id, model.InterestId);
+                    User user = new User(model.UserId, model.InterestId);
 
                     if (await _userRepository.UpdateMenteeAsync(user) > 0)
                     {
@@ -110,7 +111,7 @@ namespace DB1ChallangeFiapAPI.Controllers
 
         [HttpPut]
         [Route("updateMentorAccount")]
-        public async Task<IActionResult> UpdateMentorAccount(User model)
+        public async Task<IActionResult> UpdateMentorAccount(UpdateMentorAccountViewModel model)
         {
             try
             {
