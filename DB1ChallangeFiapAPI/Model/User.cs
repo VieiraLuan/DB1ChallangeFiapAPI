@@ -10,6 +10,7 @@
         public string Cellphone { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public string UserDescription { get; set; }
 
         //Business Data
         public string UserType { get; set; }
@@ -33,7 +34,7 @@
         }
 
 
-        public User(string fullname, string email, string bornDate, string cellphone, string city, string state, string userType, string password)
+        public User(string fullname, string email, string bornDate, string cellphone, string city, string state, string userType, string password, string userDesc)
         {
 
             Fullname = fullname;
@@ -44,6 +45,7 @@
             State = state;
             UserType = userType;
             Password = password;
+            UserDescription = userDesc;
         }
 
         // Mentee

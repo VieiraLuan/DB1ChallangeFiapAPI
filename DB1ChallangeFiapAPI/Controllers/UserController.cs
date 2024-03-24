@@ -31,6 +31,7 @@ namespace DB1ChallangeFiapAPI.Controllers
                     || string.IsNullOrEmpty(model.State)
                     || string.IsNullOrEmpty(model.UserType)
                     || string.IsNullOrEmpty(model.Password)
+                    || string.IsNullOrEmpty(model.UserDescription)
                     )
                 {
                     return BadRequest("Informe todos os dados obrigatórios");
@@ -47,7 +48,8 @@ namespace DB1ChallangeFiapAPI.Controllers
                         model.City,
                         model.State,
                         model.UserType,
-                        model.Password
+                        model.Password,
+                        model.UserDescription
 
 
                     );
