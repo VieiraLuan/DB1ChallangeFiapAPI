@@ -42,5 +42,17 @@ namespace DB1ChallangeFiapAPI.Repository
 
             return await db.ExecuteAsync(sql, user);
         }
+
+        public async Task<int> AuthUserAsync(User user)
+        {
+            using IDbConnection db = new SqlConnection(getConnectionString());
+
+            const string sql = @"SELECT COUNT(*) FROM tb_user WHERE email = @Email AND 
+            u_password = @Password AND (u_type_mentee = @UserTypeMenteeFlag OR u_type_mentor = @UserTypeMentorFlag)";
+
+            return await db.ExecuteScalarAsync<int>(sql, user);
+
+
+        }
     }
 }

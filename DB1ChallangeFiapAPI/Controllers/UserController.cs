@@ -145,5 +145,38 @@ namespace DB1ChallangeFiapAPI.Controllers
                 return BadRequest("Erro ao tentar atualizar os dados do usuário: " + ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.Email) 
+                    || string.IsNullOrEmpty(model.Password)
+                    || (string.IsNullOrEmpty(model.UserTypeMenteeFlag) & string.IsNullOrEmpty(model.UserTypeMentorFlag)))
+                {
+                    return BadRequest("Informe todos os dados obrigatórios");
+                }
+                else
+                {
+                    User findUser = new User(model.Email, model.Password, model.UserTypeMenteeFlag, model.UserTypeMentorFlag);
+
+
+                    if (await _userRepository.AuthUserAsync(findUser) > 0)
+                    {
+                        return Ok("Usuário autenticado com sucesso");
+                    }
+                    else
+                    {
+                        return NotFound("Usuário não encontrado.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Erro ao tentar logar: " + ex.Message);
+            }
+        }
     }
 }

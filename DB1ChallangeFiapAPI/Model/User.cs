@@ -70,6 +70,15 @@
             MenteeMax = menteeMaxNumber;
         }
 
+        //Login
+        public User(string email, string password, string userMenteeFlag, string userMentorFlag)
+        {
+            Email = email;
+            Password = password;
+            UserTypeMenteeFlag = userMenteeFlag;
+            UserTypeMentorFlag = userMentorFlag;
+        }
+
 
     }
 }
