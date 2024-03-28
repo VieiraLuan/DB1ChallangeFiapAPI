@@ -13,7 +13,8 @@
         public string UserDescription { get; set; }
 
         //Business Data
-        public string UserType { get; set; }
+        public string UserTypeMenteeFlag { get; set; }
+        public string UserTypeMentorFlag { get; set; }
         public int MenteeMax { get; set; }
         public int MenteeeNumber { get; set; }
 
@@ -34,7 +35,7 @@
         }
 
 
-        public User(string fullname, string email, string bornDate, string cellphone, string city, string state, string userType, string password, string userDesc)
+        public User(string fullname, string email, string bornDate, string cellphone, string city, string state, string userTypeMentee, string userTypeMentor, string password, string userDesc)
         {
 
             Fullname = fullname;
@@ -43,7 +44,8 @@
             Cellphone = cellphone;
             City = city;
             State = state;
-            UserType = userType;
+            UserTypeMenteeFlag = userTypeMentee;
+            UserTypeMentorFlag = userTypeMentor;
             Password = password;
             UserDescription = userDesc;
         }

@@ -30,7 +30,8 @@ namespace DB1ChallangeFiapAPI.Controllers
                     || string.IsNullOrEmpty(model.Cellphone)
                     || string.IsNullOrEmpty(model.City)
                     || string.IsNullOrEmpty(model.State)
-                    || string.IsNullOrEmpty(model.UserType)
+                    || string.IsNullOrEmpty(model.UserTypeMenteeFlag)
+                    || string.IsNullOrEmpty(model.UserTypeMentorFlag)
                     || string.IsNullOrEmpty(model.Password)
                     || string.IsNullOrEmpty(model.UserDescription)
                     )
@@ -48,7 +49,8 @@ namespace DB1ChallangeFiapAPI.Controllers
                         model.Cellphone,
                         model.City,
                         model.State,
-                        model.UserType,
+                        model.UserTypeMenteeFlag,
+                        model.UserTypeMentorFlag,
                         model.Password,
                         model.UserDescription
 
@@ -73,7 +75,7 @@ namespace DB1ChallangeFiapAPI.Controllers
             catch (Exception ex)
             {
 
-                return StatusCode(500,"Erro ao tentar cadastrar o usuário: " + ex.Message);
+                return StatusCode(500, "Erro ao tentar cadastrar o usuário: " + ex.Message);
 
             }
         }

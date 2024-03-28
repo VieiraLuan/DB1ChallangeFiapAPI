@@ -15,7 +15,8 @@
 
         public string State { get; set; }
 
-        public string UserType { get; set; }
+        public string UserTypeMenteeFlag { get; set; }
+        public string UserTypeMentorFlag { get; set; }
 
         public string UserDescription { get; set; }
 
