@@ -19,22 +19,16 @@
         public int MenteeeNumber { get; set; }
 
 
-        //Fk
-        public int InterestId { get; set; }
-        public int SkillId { get; set; }
-        public int ExperienceId { get; set; }
-        public int BackgroundId { get; set; }
-
-
         //Security
 
         public string Password { get; set; }
 
         public User()
         {
+
         }
 
-
+        //Create Account
         public User(string fullname, string email, string bornDate, string cellphone, string city, string state, string userTypeMentee, string userTypeMentor, string password, string userDesc)
         {
 
@@ -50,25 +44,7 @@
             UserDescription = userDesc;
         }
 
-        // Mentee
-        public User(int userid, int interestid)
-        {
-            Id = userid;
-            InterestId = interestid;
-
-        }
-
-        //Mentor
-        public User(int userid, int interestid, int skillid, int experienceid, int backgroundid, int menteeMaxNumber)
-        {
-            Id = userid;
-            InterestId = interestid;
-            SkillId = skillid;
-            ExperienceId = experienceid;
-            BackgroundId = backgroundid;
-            MenteeeNumber = 0;
-            MenteeMax = menteeMaxNumber;
-        }
+     
 
         //Login
         public User(string email, string password, string userMenteeFlag, string userMentorFlag)

@@ -22,31 +22,12 @@ namespace DB1ChallangeFiapAPI.Repository
                                 VALUES (@Fullname, @Email, @BornDate, @Cellphone, @City, @State, @UserTypeMenteeFlag, @UserTypeMentorFlag, @Password, @UserDescription);
                                 SELECT CAST(SCOPE_IDENTITY() as int)";
             return await db.ExecuteScalarAsync<int>(sql, user);
-        }
-
-        public async Task<int> UpdateMenteeAsync(User user)
-        {
-            using IDbConnection db = new SqlConnection(getConnectionString());
-
-            const string sql = @"UPDATE tb_user SET interest_id = @InterestId WHERE id = @Id";
-
-            return await db.ExecuteAsync(sql, user);
-        }
-
-        public async Task<int> UpdateMentorAsync(User user)
-        {
-            using IDbConnection db = new SqlConnection(getConnectionString());
-
-            const string sql = @"UPDATE tb_user SET interest_id = @InterestId, skill_id = @SkillId,
-            experience_id = @ExperienceId, background_id = @BackgroundId, mentee_max = @MenteeMax WHERE id = @Id";
-
-            return await db.ExecuteAsync(sql, user);
-        }
+        }      
 
         public async Task<int> AuthUserAsync(User user)
         {
             using IDbConnection db = new SqlConnection(getConnectionString());
-
+            //Change count for 1
             const string sql = @"SELECT COUNT(*) FROM tb_user WHERE email = @Email AND 
             u_password = @Password AND (u_type_mentee = @UserTypeMenteeFlag OR u_type_mentor = @UserTypeMentorFlag)";
 

@@ -54,7 +54,6 @@ namespace DB1ChallangeFiapAPI.Controllers
                         model.Password,
                         model.UserDescription
 
-
                     );
 
 
@@ -80,71 +79,6 @@ namespace DB1ChallangeFiapAPI.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("updateMenteeAccount")]
-        public async Task<IActionResult> UpdateMenteeAccount(UpdateMenteeAccountViewModel model)
-        {
-            try
-            {
-                if (model.UserId != null && model.InterestId != null)
-                {
-                    User user = new User(model.UserId, model.InterestId);
-
-                    if (await _userRepository.UpdateMenteeAsync(user) > 0)
-                    {
-                        return Ok("Usuário atualizado com sucesso.");
-
-                    }
-                    else
-                    {
-                        return StatusCode(500, "Erro ao atualizar os dados do usuário." +
-                            " O usuário não foi encontrado ou o interesse informado não existe.");
-                    }
-
-
-                }
-                else
-                {
-                    return BadRequest("Informe todos os dados obrigatórios");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Erro ao tentar atualizar os dados do usuário: " + ex.Message);
-            }
-        }
-
-        [HttpPut]
-        [Route("updateMentorAccount")]
-        public async Task<IActionResult> UpdateMentorAccount(UpdateMentorAccountViewModel model)
-        {
-            try
-            {
-                if (model.Id != null && model.InterestId != null && model.SkillId != null && model.ExperienceId != null && model.BackgroundId != null && model.MenteeMax != null)
-                {
-                    User user = new User(model.Id, model.InterestId, model.SkillId, model.ExperienceId, model.BackgroundId, model.MenteeMax);
-
-                    if (await _userRepository.UpdateMentorAsync(user) > 0)
-                    {
-                        return Ok("Usuário atualizado com sucesso.");
-
-                    }
-                    else
-                    {
-                        return StatusCode(500, "Erro ao atualizar os dados do usuário." +
-                                                       " O usuário não foi encontrado ou os dados informados não são válidos.");
-                    }
-                }
-                else
-                {
-                    return BadRequest("Informe todos os dados obrigatórios");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Erro ao tentar atualizar os dados do usuário: " + ex.Message);
-            }
-        }
 
         [HttpPost]
         [Route("login")]
