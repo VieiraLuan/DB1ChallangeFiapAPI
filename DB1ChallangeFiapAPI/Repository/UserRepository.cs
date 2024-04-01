@@ -11,7 +11,7 @@ namespace DB1ChallangeFiapAPI.Repository
 
         private string getConnectionString()
         {
-            return "Server=fiap-activities-server.database.windows.net;Database=db1challange;User Id=admindb;Password=Fiap@123;";
+            return "Server=fiap-activities-server.database.windows.net;Database=db1challange;User Id=admindb;Password=Blablabal;";
         }
 
         public async Task<int> CreateUserAsync(User user)
