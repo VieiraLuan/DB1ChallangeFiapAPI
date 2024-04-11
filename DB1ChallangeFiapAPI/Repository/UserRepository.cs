@@ -18,8 +18,8 @@ namespace DB1ChallangeFiapAPI.Repository
         {
             using IDbConnection db = new SqlConnection(getConnectionString());
 
-            const string sql = @"INSERT INTO tb_user (fullname, email, born_dt, cellphone, city, u_state, u_type_mentee,u_type_mentor, u_password, u_description)
-                                VALUES (@Fullname, @Email, @BornDate, @Cellphone, @City, @State, @UserTypeMenteeFlag, @UserTypeMentorFlag, @Password, @UserDescription);
+            const string sql = @"INSERT INTO tb_user (fullname, email, born_dt, cellphone, country, city, u_state, u_type_mentee,u_type_mentor, u_password, u_description)
+                                VALUES (@Fullname, @Email, @BornDate, @Cellphone,@Country, @City, @State, @UserTypeMenteeFlag, @UserTypeMentorFlag, @Password, @UserDescription);
                                 SELECT CAST(SCOPE_IDENTITY() as int)";
             return await db.ExecuteScalarAsync<int>(sql, user);
         }      

@@ -28,6 +28,7 @@ namespace DB1ChallangeFiapAPI.Controllers
                     || string.IsNullOrEmpty(model.Email)
                     || string.IsNullOrEmpty(model.BornDate)
                     || string.IsNullOrEmpty(model.Cellphone)
+                    || string.IsNullOrEmpty(model.Country)
                     || string.IsNullOrEmpty(model.City)
                     || string.IsNullOrEmpty(model.State)
                     || string.IsNullOrEmpty(model.UserTypeMenteeFlag)
@@ -47,6 +48,7 @@ namespace DB1ChallangeFiapAPI.Controllers
                         model.Email,
                         model.BornDate,
                         model.Cellphone,
+                        model.Country,
                         model.City,
                         model.State,
                         model.UserTypeMenteeFlag,

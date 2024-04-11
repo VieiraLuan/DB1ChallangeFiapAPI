@@ -8,6 +8,8 @@
         public string Email { get; set; }
         public string BornDate { get; set; }
         public string Cellphone { get; set; }
+
+        public string Country { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string UserDescription { get; set; }
@@ -29,13 +31,14 @@
         }
 
         //Create Account
-        public User(string fullname, string email, string bornDate, string cellphone, string city, string state, string userTypeMentee, string userTypeMentor, string password, string userDesc)
+        public User(string fullname, string email, string bornDate, string cellphone,string country, string city, string state, string userTypeMentee, string userTypeMentor, string password, string userDesc)
         {
 
             Fullname = fullname;
             Email = email;
             BornDate = bornDate;
             Cellphone = cellphone;
+            Country = country;
             City = city;
             State = state;
             UserTypeMenteeFlag = userTypeMentee;
