@@ -30,8 +30,8 @@
 
         }
 
-        //Create Account
-        public User(string fullname, string email, string bornDate, string cellphone,string country, string city, string state, string userTypeMentee, string userTypeMentor, string password, string userDesc)
+        //Create Account First Stage
+        public User(string fullname, string email, string bornDate, string cellphone,string country, string city, string state, string userTypeMentee, string userTypeMentor, string userDesc)
         {
 
             Fullname = fullname;
@@ -43,7 +43,6 @@
             State = state;
             UserTypeMenteeFlag = userTypeMentee;
             UserTypeMentorFlag = userTypeMentor;
-            Password = password;
             UserDescription = userDesc;
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace DB1ChallangeFiapAPI.ViewModel
 {
-    public class CreateUserAccountViewModel
+    public class CreateUserAccountFirstStageViewModel
     {
 
         public string Fullname { get; set; }
@@ -20,8 +20,6 @@
         public string UserTypeMentorFlag { get; set; }
 
         public string UserDescription { get; set; }
-
-        public string Password { get; set; }
 
     }
 }

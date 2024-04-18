@@ -14,7 +14,7 @@ namespace DB1ChallangeFiapAPI.Dependencies
             //Repositories
             #region 
             services.AddScoped<IUserRepository, UserRepository>();
-
+            services.AddScoped<IBackgroundRepository, BackgroundRepository>();
             #endregion
         }
 

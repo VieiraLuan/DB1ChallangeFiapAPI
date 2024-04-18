@@ -18,8 +18,8 @@ namespace DB1ChallangeFiapAPI.Controllers
         }
 
         [HttpPost]
-        [Route("createAccount")]
-        public async Task<IActionResult> CreateAccount(CreateUserAccountViewModel model)
+        [Route("createAccountFirstStage")]
+        public async Task<IActionResult> CreateAccountFirstStage(CreateUserAccountFirstStageViewModel model)
         {
             try
             {
@@ -33,7 +33,6 @@ namespace DB1ChallangeFiapAPI.Controllers
                     || string.IsNullOrEmpty(model.State)
                     || string.IsNullOrEmpty(model.UserTypeMenteeFlag)
                     || string.IsNullOrEmpty(model.UserTypeMentorFlag)
-                    || string.IsNullOrEmpty(model.Password)
                     || string.IsNullOrEmpty(model.UserDescription)
                     )
                 {
@@ -53,13 +52,12 @@ namespace DB1ChallangeFiapAPI.Controllers
                         model.State,
                         model.UserTypeMenteeFlag,
                         model.UserTypeMentorFlag,
-                        model.Password,
                         model.UserDescription
 
                     );
 
 
-                    int userId = await _userRepository.CreateUserAsync(user);
+                    int userId = await _userRepository.CreateUserFirstStepAsync(user);
 
                     if (userId > 0)
                     {
