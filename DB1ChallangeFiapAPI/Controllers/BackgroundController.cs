@@ -31,7 +31,6 @@ namespace DB1ChallangeFiapAPI.Controllers
                 }
                 else
                 {
-
                     foreach (var background in backgroundList)
                     {
                         if (
