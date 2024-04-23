@@ -18,22 +18,55 @@ namespace DB1ChallangeFiapAPI.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(vm.Email)
+                    || string.IsNullOrEmpty(vm.Password)
+                    || (string.IsNullOrEmpty(vm.UserTypeMenteeFlag) & string.IsNullOrEmpty(vm.UserTypeMentorFlag)))
+                {
+                    return BadRequest("Informe todos os dados obrigatórios");
+                }
+                else
+                {
+                    User findUser = new User(vm.Email, vm.Password, vm.UserTypeMenteeFlag, vm.UserTypeMentorFlag);
+
+
+                    if (await _userRepository.AuthUserAsync(findUser) > 0)
+                    {
+                        return Ok("Usuário autenticado com sucesso");
+                    }
+                    else
+                    {
+                        return NotFound("Usuário não encontrado.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Erro ao tentar logar: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("createAccountFirstStage")]
-        public async Task<IActionResult> CreateAccountFirstStage(CreateUserAccountFirstStageViewModel model)
+        public async Task<IActionResult> CreateAccountFirstStage(CreateUserAccountFirstStageViewModel vm)
         {
             try
             {
                 if (
-                    string.IsNullOrEmpty(model.Fullname)
-                    || string.IsNullOrEmpty(model.Email)
-                    || string.IsNullOrEmpty(model.BornDate)
-                    || string.IsNullOrEmpty(model.Cellphone)
-                    || string.IsNullOrEmpty(model.Country)
-                    || string.IsNullOrEmpty(model.City)
-                    || string.IsNullOrEmpty(model.State)
-                    || string.IsNullOrEmpty(model.UserTypeMenteeFlag)
-                    || string.IsNullOrEmpty(model.UserTypeMentorFlag)
-                    || string.IsNullOrEmpty(model.UserDescription)
+                    string.IsNullOrEmpty(vm.Fullname)
+                    || string.IsNullOrEmpty(vm.Email)
+                    || string.IsNullOrEmpty(vm.BornDate)
+                    || string.IsNullOrEmpty(vm.Cellphone)
+                    || string.IsNullOrEmpty(vm.Country)
+                    || string.IsNullOrEmpty(vm.City)
+                    || string.IsNullOrEmpty(vm.State)
+                    || string.IsNullOrEmpty(vm.UserTypeMenteeFlag)
+                    || string.IsNullOrEmpty(vm.UserTypeMentorFlag)
+                    || string.IsNullOrEmpty(vm.UserDescription)
                     )
                 {
                     return BadRequest("Informe todos os dados obrigatórios");
@@ -43,16 +76,16 @@ namespace DB1ChallangeFiapAPI.Controllers
 
                     User user = new User(
 
-                        model.Fullname,
-                        model.Email,
-                        model.BornDate,
-                        model.Cellphone,
-                        model.Country,
-                        model.City,
-                        model.State,
-                        model.UserTypeMenteeFlag,
-                        model.UserTypeMentorFlag,
-                        model.UserDescription
+                        vm.Fullname,
+                        vm.Email,
+                        vm.BornDate,
+                        vm.Cellphone,
+                        vm.Country,
+                        vm.City,
+                        vm.State,
+                        vm.UserTypeMenteeFlag,
+                        vm.UserTypeMentorFlag,
+                        vm.UserDescription
 
                     );
 
@@ -79,38 +112,48 @@ namespace DB1ChallangeFiapAPI.Controllers
             }
         }
 
-
-        [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        [HttpPut]
+        [Route("setUserDetails")]
+        public async Task<IActionResult> SetUserDetails(UserDetailsViewModel vm)
         {
             try
             {
-                if (string.IsNullOrEmpty(model.Email) 
-                    || string.IsNullOrEmpty(model.Password)
-                    || (string.IsNullOrEmpty(model.UserTypeMenteeFlag) & string.IsNullOrEmpty(model.UserTypeMentorFlag)))
+                if (
+                    string.IsNullOrEmpty(vm.UserId)
+                    || string.IsNullOrEmpty(vm.Password)
+                    || string.IsNullOrEmpty(vm.MenteeMax)
+                    )
                 {
                     return BadRequest("Informe todos os dados obrigatórios");
                 }
                 else
                 {
-                    User findUser = new User(model.Email, model.Password, model.UserTypeMenteeFlag, model.UserTypeMentorFlag);
+                    User temp = new User(Convert.ToInt32(vm.UserId), Convert.ToInt32(vm.MenteeMax), vm.Password);
 
+                    var lines = await _userRepository.SetUserDetails(temp);
 
-                    if (await _userRepository.AuthUserAsync(findUser) > 0)
+                    if (lines > 0)
                     {
-                        return Ok("Usuário autenticado com sucesso");
+                        return Ok($"Dados do usuário atualizados com sucesso, {lines} linha(s) alterada(S)");
                     }
                     else
                     {
-                        return NotFound("Usuário não encontrado.");
+                        return StatusCode(500, "Erro ao atualizar os dados do usuário.");
                     }
+
                 }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Erro ao tentar logar: " + ex.Message);
+                return StatusCode(500, "Erro ao atualizar o cadastro do usuário: " + ex.Message);
+                throw;
             }
+
         }
+
+
+
+
+
     }
 }

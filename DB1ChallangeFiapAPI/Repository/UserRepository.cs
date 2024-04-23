@@ -35,5 +35,13 @@ namespace DB1ChallangeFiapAPI.Repository
 
 
         }
+
+        public async Task<int> SetUserDetails(User user)
+        {
+            using IDbConnection db = new SqlConnection(getConnectionString());
+
+            const string sql = @"UPDATE tb_user SET u_password = @Password , u_mentee_max = @MenteeMax, u_mentee_number = @MenteeeNumber WHERE id=@Id;";
+            return await db.ExecuteAsync(sql, user);
+        }
     }
 }

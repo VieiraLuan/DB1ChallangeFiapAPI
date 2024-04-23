@@ -7,5 +7,6 @@ namespace DB1ChallangeFiapAPI.Repository.Interface
 
         public Task<int> CreateUserFirstStepAsync(User user);
         public Task<int> AuthUserAsync(User user);
+        public Task<int> SetUserDetails(User user);
     }
 }

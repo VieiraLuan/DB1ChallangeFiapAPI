@@ -55,7 +55,7 @@ namespace DB1ChallangeFiapAPI.Controllers
                         }
                     }
 
-                    return Ok($"{count} Experiências criadas com sucesso");
+                    return Ok($"{count} Interesses criados com sucesso");
 
                 }
             }

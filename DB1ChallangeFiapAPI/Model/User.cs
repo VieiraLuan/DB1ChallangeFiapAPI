@@ -30,6 +30,14 @@
 
         }
 
+        public User(int id, int menteeMax, string password)
+        {
+            Id = id;
+            MenteeMax = menteeMax;
+            Password = password;
+        }
+
+
         //Create Account First Stage
         public User(string fullname, string email, string bornDate, string cellphone,string country, string city, string state, string userTypeMentee, string userTypeMentor, string userDesc)
         {
