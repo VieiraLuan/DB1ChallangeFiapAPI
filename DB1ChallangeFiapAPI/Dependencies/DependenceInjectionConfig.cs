@@ -1,5 +1,7 @@
 ﻿using DB1ChallangeFiapAPI.Repository;
 using DB1ChallangeFiapAPI.Repository.Interface;
+using DB1ChallangeFiapAPI.Service;
+using DB1ChallangeFiapAPI.Service.Interface;
 
 namespace DB1ChallangeFiapAPI.Dependencies
 {
@@ -17,6 +19,11 @@ namespace DB1ChallangeFiapAPI.Dependencies
             services.AddScoped<IBackgroundRepository, BackgroundRepository>();
             services.AddScoped<IExperienceRepository, ExperienceRepository>();
             services.AddScoped<IInterestRepository, InterestRepository>();
+            #endregion
+
+            //Services
+            #region
+            services.AddScoped<IAzureServices, AzureServices>();
             #endregion
         }
 

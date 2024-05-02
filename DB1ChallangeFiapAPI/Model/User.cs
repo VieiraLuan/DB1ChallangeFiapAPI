@@ -6,6 +6,7 @@
         public int Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
+        public string ImageUrl { get; set; }
         public string BornDate { get; set; }
         public string Cellphone { get; set; }
 
@@ -30,11 +31,12 @@
 
         }
 
-        public User(int id, int menteeMax, string password)
+        public User(int id, int menteeMax, string password, string imageUrl)
         {
             Id = id;
             MenteeMax = menteeMax;
             Password = password;
+            ImageUrl = imageUrl;
         }
 
 

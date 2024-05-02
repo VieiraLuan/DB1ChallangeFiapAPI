@@ -1,5 +1,7 @@
 ﻿using DB1ChallangeFiapAPI.Model;
 using DB1ChallangeFiapAPI.Repository.Interface;
+using DB1ChallangeFiapAPI.Service;
+using DB1ChallangeFiapAPI.Service.Interface;
 using DB1ChallangeFiapAPI.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +12,14 @@ namespace DB1ChallangeFiapAPI.Controllers
     {
 
         private readonly IUserRepository _userRepository;
+        private readonly IAzureServices _azureServices;
+        private readonly string imageContainer = "db1-user-images";
 
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IAzureServices azureServices)
         {
             _userRepository = userRepository;
+            _azureServices = azureServices;
         }
 
         [HttpPost]
@@ -122,13 +127,19 @@ namespace DB1ChallangeFiapAPI.Controllers
                     string.IsNullOrEmpty(vm.UserId)
                     || string.IsNullOrEmpty(vm.Password)
                     || string.IsNullOrEmpty(vm.MenteeMax)
+                    || string.IsNullOrEmpty(vm.UserImage)
                     )
                 {
                     return BadRequest("Informe todos os dados obrigatórios");
                 }
                 else
                 {
-                    User temp = new User(Convert.ToInt32(vm.UserId), Convert.ToInt32(vm.MenteeMax), vm.Password);
+                    //Manipulation for Azure Service to upload image - Start
+                    var imageBytes = Convert.FromBase64String(vm.UserImage);
+
+                    var imageUrl = await _azureServices.UploadFileToAzure(imageBytes, imageContainer);
+
+                    User temp = new User(Convert.ToInt32(vm.UserId), Convert.ToInt32(vm.MenteeMax), vm.Password,imageUrl);
 
                     var lines = await _userRepository.SetUserDetails(temp);
 
